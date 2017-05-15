@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('api/goods', 'ApiController@getGoods');
+//Route::get('api/carts/{openId}', 'ApiController@getCart');
+//Route::get('api/order/{openId}', 'ApiController@getOrder');
+//Route::get('api/users/{openId}', 'ApiController@getUser');
+//Route::post('api/users/', 'ApiController@updateUser');

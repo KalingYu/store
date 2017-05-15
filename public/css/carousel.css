@@ -1,0 +1,110 @@
+.carousel.carousel-slider {
+    top: 0;
+    left: 0;
+    height: 10em;
+}
+.carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 10em;
+    -webkit-perspective: 500px;
+    perspective: 500px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.carousel.carousel-slider .carousel-item {
+    width: 100%;
+    height: 100%;
+    min-height: 10em;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.carousel .carousel-item {
+    display: none;
+    width: 100%;
+    height: 10em;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+a {
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+a {
+    background-color: transparent;
+}
+
+.carousel .carousel-item>img {
+    width: 100%;
+    height: 10em;
+}
+a img {
+    border: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.carousel .indicators {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+}
+ul:not(.browser-default) {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.carousel .indicators .indicator-item {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+    margin: 24px 4px;
+    background-color: rgba(255,255,255,0.5);
+    transition: background-color .3s;
+    border-radius: 50%;
+}
+
+ul:not(.browser-default) li {
+    list-style-type: none;
+}
+
+.carousel.carousel-slider {
+    height: 10em;
+}
+
+.carousel .indicators .indicator-item.active {
+    background-color: #fff;
+}
+.carousel .indicators .indicator-item {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+    margin: 1em 0.2em;
+    background-color: rgba(255,255,255,0.5);
+    transition: background-color .3s;
+    border-radius: 50%;
+}
+ul:not(.browser-default) li {
+    list-style-type: none;
+}

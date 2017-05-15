@@ -1,0 +1,131 @@
+#avatar {
+    height: 2em;
+    width: 2em;
+    border-radius: 1em;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+}
+
+#avatar-container {
+}
+
+#user_name {
+    text-align: left;
+    color: #999999;
+    font-size: 1em;;
+    flex: 5;
+    margin-left: 0.5em
+}
+
+#msg-container {
+    color: #999999;
+}
+
+#user_name a,
+#msg-container a {
+    line-height: 2.7em;
+}
+
+#msg-container {
+    flex: 3;
+    text-align: right;
+    margin-right: 0.5em;
+}
+
+#header_container {
+    background-color: #1d1f20;
+}
+
+.weui-tabbar {
+    bottom: 0;
+    position: fixed;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.weui-cell__hd img {
+    width: 5em;
+}
+
+.cart-total_count {
+    text-align: right;
+    margin-top: 0.2em;
+}
+
+.cart-total_price {
+    color: #fe5722;
+    font-size: 0.7em;
+}
+
+div.weui-cell__bd {
+    width: 20em;
+    margin-left: 1em;
+}
+
+.weui-input {
+    /*width: 20%;*/
+}
+
+.weui-cell__ft {
+    width: 5em;
+}
+
+.cart-goods_delete img {
+    width: 1.5em;
+    margin-left: 1.5em;
+}
+
+#cart-confirm a {
+    font-size: 1em;
+    width: 93%;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+
+.me-headline {
+    font-size: 1em;
+    margin-left: 0.5em;
+    color: #212121;
+    margin-top: 1em;
+}
+
+#me-container {
+    margin-left: 2em;
+    color: #757575;
+    font-size: 0.9em;
+}
+
+.me-edit {
+    margin-right: 2em;
+    font-size: 0.9em;
+    color: #00BCD4;
+}
+
+.me-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 60%;
+}
+
+#me-orders-headline {
+    margin-top: 2em;
+}
+
+.order_container {
+    padding: 0.5em 1em 0.5em 2em;
+    font-size: 0.9em;
+    color: #757575;
+}
+
+.me-oder_price {
+    color: #fe5722;
+    font-size: 0.7em;
+}
+
+.edit-label {
+    width: 3em;
+}

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
+    public static $APP_ID = "wx510ecd8668932ea8";
+    public static $APP_SECRET = "dce769e237509b1f10480f9cb7440d63";
+
     public function getGoods(Request $request)
     {
         $code = 0;
@@ -42,7 +46,7 @@ class ApiController extends Controller
         $msg = "获取成功";
         $body = [];
         try {
-            $body = DB::table('users')->where('open_id', $openId)->get()->first();
+            $body = DB::table('users')->where('openid', $openId)->get()->first();
         } catch (QueryException $ex) {
             $code = -1;
             $msg = "查询失败";
@@ -69,6 +73,18 @@ class ApiController extends Controller
         $code = 0;
         $msg = "添加成功";
         $body = [];
+
+        try {
+            $user = new User;
+            $user->wx_name = $request->input('nickname');
+            $user->openid = $request->input('openid');
+            $user->sex = $request->input('sex');
+            $user->avatar = $request->input('headimgurl');
+            $user->save();
+        }catch (QueryException $exception) {
+            $code = -1;
+            $msg = "添加用户失败";
+        }
     }
 
     public function updateUser(Request $request) {

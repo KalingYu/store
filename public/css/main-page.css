@@ -129,3 +129,17 @@ div.weui-cell__bd {
 .edit-label {
     width: 3em;
 }
+
+.card .card-image img {
+    height: 10em;
+}
+
+.goods_list {
+    clear: both;
+}
+
+.goods_list h4 {
+    margin-left: 0.5em;
+    margin-bottom: 0.2em;
+    color: #212121;
+}

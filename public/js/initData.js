@@ -38,7 +38,7 @@ var data = {
         name: "余嘉陵",
         phone: "18712757621",
         address: "东北大学秦皇岛分校",
-        open_id: '11',
+        openid: '11',
         union_id: '',
         access_token: '',
         wx_name: 'Kaling',
@@ -128,6 +128,7 @@ var vm = new Vue({
 
 getGoodsData();
 getCarts();
+addUser();
 getUser();
 
 /**
@@ -268,9 +269,10 @@ function getGoodsData() {
 // }
 
 function getUser() {
+    var openid = document.getElementById("openid").value;
     axios({
         method: 'get',
-        url: "" + '/api/users/' + vm.me.open_id,
+        url: "" + '/api/users/' + openid,
         responseType: 'json'
     }).then(function (response) {
         console.log(response);
@@ -322,6 +324,27 @@ function getCarousels() {
         var msg = jsonObj["msg"];
         if (code === 0) {
             data.cartArray = jsonObj['body'];
+        } else {
+            alert(msg);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function getMeInfo() {
+    var openid = document.getElementById("openid").value;
+    axios({
+        method: 'get',
+        url: "" + '/api/users/' + openid,
+        responseType: 'json'
+    }).then(function (response) {
+        console.log(response);
+        var jsonObj = response.data;
+        var code = jsonObj["code"];
+        var msg = jsonObj["msg"];
+        if (code === 0) {
+            data.me = jsonObj['body'];
         } else {
             alert(msg);
         }
@@ -391,4 +414,30 @@ function showAddCartSheet(index) {
 
     iosActionsheet.addClass('weui-actionsheet_toggle');
     iosMask.fadeIn(200);
+}
+
+function addUser() {
+    openid = document.getElementById("openid").value;
+    nickname = document.getElementById("nickname").value;
+    sex = document.getElementById("sex").value;
+    headimgurl = document.getElementById("headimgurl").value;
+    vm.me.openid = openid;
+    vm.me.wx_name = nickname;
+    vm.me.sex = sex;
+    vm.me.avatar = headimgurl;
+    $.ajax({
+        type: "PUT",
+        url: "" + '/api/users',
+        dataType: "json",
+        data: {openid: openid, nickname: nickname, sex: sex, headimgurl: headimgurl},
+        success: function (jsonData) {
+            var code = jsonData["code"];
+            var msg = jsonData["msg"];
+            if (code === 0) {
+                window.location.href='store/' + nickname;
+            } else {
+                alert(msg);
+            }
+        }
+    });
 }

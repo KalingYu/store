@@ -15,4 +15,11 @@ Route::get('/', function () {
     return view('store');
 });
 
+Route::get('store/{openId}', 'UserController@toStorePage');
+Route::get('code', 'UserController@getCode');
+//Route::get('code', function () {
+//    return view('code');
+//});
+
 Route::get('store', 'UserController@toStorePage');
+Route::get('token', 'UserController@getAccessToken');

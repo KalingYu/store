@@ -20,7 +20,7 @@
             <a>@{{me.wx_name}}</a>
         </div>
         <div id="msg-container" @click="refreshData" class="weui-flex__item">
-            <a>  </a>
+            <a> </a>
         </div>
     </div>
 
@@ -74,33 +74,96 @@
                         <a v-for="img in carouselArray" class="carousel-item"><img :src="img.imgUrl"></a>
                     </div>
                     <!--轮播结束-->
+
+                    {{--商品列表--}}
                     <div class="card-container">
-                        <div class="card left" v-for="(goods, index) in goodsArray">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" :src="goods.imgUrl">
-                            </div>
-                            <div class="card-content">
-                                <!--标题，一般几个字就行了-->
-                                <span class="card-title">@{{goods.name}} <i
-                                            class="goods-price">￥@{{goods.price}}/m</i> <img
-                                            src="img/goods-detail.png"
-                                            class="right activator goods-detail-btn"></span>
-                                <p class="add-to-cart-container"><a href="javascript:;" @click="showAddCartSheet(index)"
-                                                                    class="add-to-cart-btn weui-btn_mini weui-btn weui-btn_plain-primary">添加到购物车</a>
-                                </p>
-                            </div>
-                            <div class="card-reveal">
-                                <img class="card-title  right close-btn" src="img/close-btn.png"/>
-                                <p class="goods-detail">
-                                    @{{goods.intro}}
-                                </p>
+
+                        <div class="goods_list">
+                            <h4>成品楼梯</h4>
+                            <div v-if="goods.type === '成品楼梯'" class="card left" v-for="(goods, index) in goodsArray">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" :src="goods.imgUrl">
+                                </div>
+                                <div class="card-content">
+                                    <!--标题，一般几个字就行了-->
+                                    <span class="card-title">@{{goods.name}} <i
+                                                class="goods-price">￥@{{goods.price}}/步</i> <img
+                                                src="img/goods-detail.png"
+                                                class="right activator goods-detail-btn"></span>
+                                    <p class="add-to-cart-container"><a href="javascript:;"
+                                                                        @click="showAddCartSheet(index)"
+                                                                        class="add-to-cart-btn weui-btn_mini weui-btn weui-btn_plain-primary">添加到购物车</a>
+                                    </p>
+                                </div>
+                                <div class="card-reveal">
+                                    <img class="card-title  right close-btn" src="img/close-btn.png"/>
+                                    <p class="goods-detail">
+                                        @{{goods.intro}}
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="goods_list">
+                            <h4>实木门</h4>
+                            <div v-if="goods.type === '实木门'" class="card left" v-for="(goods, index) in goodsArray">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" :src="goods.imgUrl">
+                                </div>
+                                <div class="card-content">
+                                    <!--标题，一般几个字就行了-->
+                                    <span class="card-title">@{{goods.name}} <i
+                                                class="goods-price">￥@{{goods.price}}/扇</i> <img
+                                                src="img/goods-detail.png"
+                                                class="right activator goods-detail-btn"></span>
+                                    <p class="add-to-cart-container"><a href="javascript:;"
+                                                                        @click="showAddCartSheet(index)"
+                                                                        class="add-to-cart-btn weui-btn_mini weui-btn weui-btn_plain-primary">添加到购物车</a>
+                                    </p>
+                                </div>
+                                <div class="card-reveal">
+                                    <img class="card-title  right close-btn" src="img/close-btn.png"/>
+                                    <p class="goods-detail">
+                                        @{{goods.intro}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="goods_list">
+                            <h4>楼梯扶手</h4>
+                            <div v-if="goods.type === '楼梯扶手'" class="card left" v-for="(goods, index) in goodsArray">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" :src="goods.imgUrl">
+                                </div>
+                                <div class="card-content">
+                                    <!--标题，一般几个字就行了-->
+                                    <span class="card-title">@{{goods.name}} <i
+                                                class="goods-price">￥@{{goods.price}}/m</i> <img
+                                                src="img/goods-detail.png"
+                                                class="right activator goods-detail-btn"></span>
+                                    <p class="add-to-cart-container"><a href="javascript:;"
+                                                                        @click="showAddCartSheet(index)"
+                                                                        class="add-to-cart-btn weui-btn_mini weui-btn weui-btn_plain-primary">添加到购物车</a>
+                                    </p>
+                                </div>
+                                <div class="card-reveal">
+                                    <img class="card-title  right close-btn" src="img/close-btn.png"/>
+                                    <p class="goods-detail">
+                                        @{{goods.intro}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
+                    {{--商品列表结束--}}
                 </div>
                 <div id="cart-page" class="hidden">
                     <div class="weui-cells__title">购物车详情</div>
                     <div class="weui-cells" v-if="cartArray.length > 0">
+
                         <div class="weui-cell" v-for="(goods, index) in cartArray">
                             <div class="weui-cell__hd"><img class="cart-goods_img" :src="goods.img_url" alt="">
                             </div>
@@ -109,10 +172,12 @@
                                 <i class="cart-total_price ">￥@{{goods.total_price}}</i>
                             </div>
                             <div class="cart-goods_name weui-cell__ft">
-                                <span class="right cart-goods_delete"><img @click="deleteCart(index, goods.id)" src="img/delete-icon.png"></span>
+                                <span class="right cart-goods_delete"><img @click="deleteCart(index, goods.id)"
+                                                                           src="img/delete-icon.png"></span>
                                 <span class="right cart-total_count">@{{goods.count}}</span>
                             </div>
                         </div>
+
                     </div>
 
                     <div id="">
@@ -234,7 +299,8 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">数量</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="number" v-model="currentGoodsCount" pattern="[0-9]*" placeholder="请输入购买数量"/>
+                        <input class="weui-input" type="number" v-model="currentGoodsCount" pattern="[0-9]*"
+                               placeholder="请输入购买数量"/>
                     </div>
                 </div>
                 <div class="weui-actionsheet__action">
@@ -258,6 +324,11 @@
         </div>
     </div>
     <!--end toast-->
+
+    <input type="hidden" id="openid" value="{{$infoArr['openid']}}">
+    <input type="hidden" id="nickname" value="{{$infoArr['nickname']}}">
+    <input type="hidden" id="sex" value="{{$infoArr['sex']}}">
+    <input type="hidden" id="headimgurl" value="{{$infoArr['headimgurl']}}">
 
 </div>
 

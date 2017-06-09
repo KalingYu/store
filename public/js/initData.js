@@ -2,6 +2,11 @@ var data = {
     isEditUserMod: false,
     currentGoodsCount: 1,
     toCartGoods: {},
+    totalPriceToPay: 0,
+    PAY_PARAM: {
+        // 支付相关的参数
+        APP_ID: "wxb206faacb556aef7",
+    },
 
     carouselArray: [
         {
@@ -121,6 +126,38 @@ var vm = new Vue({
             deleteCart(cardId, function () {
                 vm.cartArray.splice(index, 1);
             });
+        },
+
+        // 显示提醒支付数额的 dialog
+        showPayDetailDialog: function () {
+
+            // 弹出弹窗
+            var iosDialog1 = $('#iosDialog1');
+            iosDialog1.fadeIn(200);
+            var length = vm.cartArray.length;
+            for (var i = 0; i < length; i++) {
+                this.totalPriceToPay += this.cartArray[i].total_price;
+            }
+
+        },
+
+        // 前往支付
+        toPay: function () {
+            var iosDialog1 = $('#iosDialog1');
+            // 初始化
+            iosDialog1.fadeOut(200);
+            this.totalPriceToPay = 0;
+
+            // 正式支付
+
+        },
+
+        // 取消支付
+        cancelPay: function () {
+            var iosDialog1 = $('#iosDialog1');
+            // 初始化
+            iosDialog1.fadeOut(200);
+            this.totalPriceToPay = 0;
         }
     }
 });
@@ -188,6 +225,54 @@ function deleteCart(cartId, callback) {
     //         console.log(error);
     //     });
 
+}
+
+/**
+ * 微信支付
+ */
+
+function goToWXPay() {
+    var jsPayParam = getPayParam();
+    jsApiCall(jsPayParam);
+}
+
+/**
+ * 生成支付参数
+ */
+function getPayParam() {
+    var param = {
+        appId: vm.PAY_PARAM.APP_ID
+    };
+    param.timeStamp = new Date().getTime();
+    param.nonceStr = Math.ceil(Math.random() * 10000000000000);
+    param.package = "prepay_id=123456789";
+    param.signType = "MD5";
+
+    var paramStr = JSON.stringify(param);
+    var stringSignTemp = paramStr + "&key=78062EC915E89CFF0B8603B47B1E3726";
+    param.paySign = $.md5(stringSignTemp);
+    return param;
+}
+
+/**
+ * 正式发起微信支付
+ */
+function jsApiCall(jsapi) {
+    WeixinJSBridge.invoke(
+        'getBrandWCPayRequest',
+        jsapi,
+        function (res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                alert("支付成功")
+
+                //你的业务逻辑
+
+            } else {
+                alert("支付失败")
+                alert(JSON.stringify(res.err_msg))
+            }
+        }
+    );
 }
 
 /**
@@ -434,7 +519,7 @@ function addUser() {
             var code = jsonData["code"];
             var msg = jsonData["msg"];
             if (code === 0) {
-                window.location.href='store/' + nickname;
+                window.location.href = 'store/' + nickname;
             } else {
                 alert(msg);
             }

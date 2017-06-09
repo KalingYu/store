@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>心悦木制品</title>
+    <title>顺富楼梯</title>
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href={{asset("css/lib/weui.min.css")}}/>
     <link rel="stylesheet" href={{asset("css/main-page.css")}}/>
@@ -70,10 +70,10 @@
                     <!--搜索框结束-->
 
                     <!--轮播开始-->
-                    {{--<div class="carousel carousel-slider" data-indicators="true">--}}
-                        {{--<a v-for="img in carouselArray" class="carousel-item"><img :src="img.imgUrl"></a>--}}
-                    {{--</div>--}}
-                    <!--轮播结束-->
+                {{--<div class="carousel carousel-slider" data-indicators="true">--}}
+                {{--<a v-for="img in carouselArray" class="carousel-item"><img :src="img.imgUrl"></a>--}}
+                {{--</div>--}}
+                <!--轮播结束-->
 
                     {{--商品列表--}}
                     <div class="card-container">
@@ -141,7 +141,7 @@
                                     <span class="card-title">@{{goods.name}}
                                         <i class="goods-price">￥@{{goods.price}}/m</i>
                                         <img src="{{asset("img/goods-detail.png")}}"
-                                                class="right activator goods-detail-btn">
+                                             class="right activator goods-detail-btn">
                                     </span>
                                     <p class="add-to-cart-container"><a href="javascript:;"
                                                                         @click="showAddCartSheet(index)"
@@ -186,7 +186,7 @@
                     </div>
 
                     <div id="cart-confirm">
-                        <a href="javascript:;" class="weui-btn weui-btn_primary">前往付款</a>
+                        <a href="javascript:;" @click="showPayDetailDialog" id="show-pay-btn" class="weui-btn weui-btn_primary">前往付款</a>
                     </div>
                 </div>
 
@@ -326,28 +326,47 @@
     </div>
     <!--end toast-->
 
+    <!--BEGIN dialog1-->
+    <div class="js_dialog" id="iosDialog1" style="display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">确认支付</strong></div>
+            <div class="weui-dialog__bd">您将支付总额为@{{totalPriceToPay}}元的订单</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" @click="toPay" class="weui-dialog__btn weui-dialog__btn_default">确认</a>
+                <a href="javascript:;" @click="cancelPay" class="weui-dialog__btn weui-dialog__btn_primary">取消</a>
+            </div>
+        </div>
+    </div>
+    <!--END dialog1-->
+
+
     <input type="hidden" id="openid" value="{{$openId}}">
     <input type="hidden" id="imgurl" value="{{url('/img')}}">
 </div>
 
 </body>
 
+
+<script src={{asset("js/lib/jquery.min.js")}}></script>
+<script src={{asset("js/lib/md5.js")}}></script>
 <script src={{asset("http://res.wx.qq.com/open/js/jweixin-1.2.0.js")}}></script>
 <script src={{asset("js/lib/axios.min.js")}}></script>
 <script src={{asset("js/lib/vue.js")}}></script>
-<script src={{asset("js/lib/jquery.min.js")}}></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src={{asset("js/weixin.js")}}></script>
 <script src={{asset("js/lib/materialize.min.js")}}></script>
 <script src={{asset("js/lib/init.js")}}></script>
 <script src={{asset("js/lib/listener.js")}}></script>
 <script src={{asset("js/initData.js")}}></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-<script src={{asset("js/weixin.js")}}></script>
+
 <script>
     $(document).ready(function () {
 
         initSearchBox();
         initTabBar();
         $('.carousel.carousel-slider').carousel({fullWidth: true, duration: 200, indicators: true});
+
     });
 
 </script>

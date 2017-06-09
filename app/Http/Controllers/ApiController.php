@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
-    public static $APP_ID = "wx510ecd8668932ea8";
-    public static $APP_SECRET = "dce769e237509b1f10480f9cb7440d63";
+    public static $APP_ID = "wxb206faacb556aef7";
+    public static $APP_SECRET = "1a7a5e8d89dbc3a37a1f326a74dfcbb0";
 
     public function getGoods(Request $request)
     {

@@ -148,8 +148,18 @@ var vm = new Vue({
             iosDialog1.fadeOut(200);
             this.totalPriceToPay = 0;
 
-            // 正式支付
+            // 存储当前订单号
+            var order = {
+                openid: this.me.openid,
+                number: new Date().getTime(),
+                total_price: this.totalPriceToPay,
+                progress: "待支付"
+            };
 
+            this.ordersArray.push(order);
+
+            // 正式支付
+            goToWXPay(order.number, 1);
         },
 
         // 取消支付
@@ -231,27 +241,31 @@ function deleteCart(cartId, callback) {
  * 微信支付
  */
 
-function goToWXPay() {
-    var jsPayParam = getPayParam();
-    jsApiCall(jsPayParam);
+function goToWXPay(orderNumber, price) {
+
+    $.ajax({
+        type: "POST",
+        url: "/api/payparams",
+        dataType: "json",
+        data: {"openid": vm.me.openid, "price": price, "orderNumber": orderNumber},
+        success: function (jsonData) {
+            var code = jsonData["code"];
+            var msg = jsonData["msg"];
+            if (code === 0) {
+                var jsPayParam = jsonData['body'];
+                jsApiCall(jsPayParam);
+            } else {
+                alert(msg);
+            }
+        }
+    });
 }
 
 /**
  * 生成支付参数
  */
 function getPayParam() {
-    var param = {
-        appId: vm.PAY_PARAM.APP_ID
-    };
-    param.timeStamp = new Date().getTime();
-    param.nonceStr = Math.ceil(Math.random() * 10000000000000);
-    param.package = "prepay_id=123456789";
-    param.signType = "MD5";
 
-    var paramStr = JSON.stringify(param);
-    var stringSignTemp = paramStr + "&key=78062EC915E89CFF0B8603B47B1E3726";
-    param.paySign = $.md5(stringSignTemp);
-    return param;
 }
 
 /**

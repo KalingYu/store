@@ -29,3 +29,5 @@ Route::get('carts/{openId}', 'ApiController@getCarts');
 Route::post('carts/delete', 'ApiController@deleteCarts');
 Route::get('wxUserInfo', 'ApiController@getWxUserInfo');
 Route::get('exist/{openId}', 'ApiController@isExist');
+Route::get('notify', 'ApiController@notifyPay');
+Route::post('payparams', 'ApiController@getWxPayParam');

@@ -253,6 +253,7 @@ function goToWXPay(orderNumber, price) {
             var msg = jsonData["msg"];
             if (code === 0) {
                 var jsPayParam = jsonData['body'];
+                console.log("签名的是：" + jsPayParam);
                 jsApiCall(jsPayParam);
             } else {
                 alert(msg);

@@ -209,12 +209,13 @@ class ApiController extends Controller
 
         // 统一下单
         $input = new WxPayUnifiedOrder();
+        $input->SetAppid(ApiController::$APP_ID);
         $input->SetBody("顺富楼梯订单");
         $input->SetAttach("东莞市厚街顺富楼梯");
         $input->SetOut_trade_no($orderNumber);
         $input->SetTotal_fee($fee);
         $input->SetTime_start(date("YmdHis"));
-        $input->SetTime_expire(date("YmdHis", time() + 600));
+        $input->SetTime_expire(date("YmdHis", time() + 1000 * 60 * 5));
         $input->SetGoods_tag("test");
         $input->SetNotify_url(url('http://wf.hk1.mofasuidao.cn/api/notify'));
         $input->SetTrade_type("JSAPI");

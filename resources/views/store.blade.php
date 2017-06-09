@@ -343,6 +343,9 @@
 
     <input type="hidden" id="openid" value="{{$openId}}">
     <input type="hidden" id="imgurl" value="{{url('/img')}}">
+    <input type="hidden" id="timestamp" value="{{$signPackage['timestamp']}}">
+    <input type="hidden" id="nonceStr" value="{{$signPackage['nonceStr']}}">
+    <input type="hidden" id="signature" value="{{$signPackage['signature']}}">
 </div>
 
 </body>

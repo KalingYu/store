@@ -19,7 +19,10 @@ class UserController extends Controller
 {
     public function toStorePage(Request $request, $openId)
     {
-        return view('store', ['openId' => $openId]);
+        // 微信相关的签名
+        $jssdk = new \JSSDK(ApiController::$APP_ID, ApiController::$APP_SECRET);
+        $signPackage = $jssdk->GetSignPackage();
+        return view('store', ['openId' => $openId, 'signPackage' => $signPackage]);
     }
 
     public function getAccessToken(Request $request)

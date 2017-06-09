@@ -17,9 +17,6 @@ Route::get('/', function () {
 
 Route::get('store/{openId}', 'UserController@toStorePage');
 Route::get('code', 'UserController@getCode');
-//Route::get('code', function () {
-//    return view('code');
-//});
-
 Route::get('store', 'UserController@toStorePage');
 Route::get('token', 'UserController@getAccessToken');
+Route::get('codeifneed', 'UserController@getTokenIfNeed');

@@ -28,3 +28,4 @@ Route::post('carts', 'ApiController@addToCart');
 Route::get('carts/{openId}', 'ApiController@getCarts');
 Route::post('carts/delete', 'ApiController@deleteCarts');
 Route::get('wxUserInfo', 'ApiController@getWxUserInfo');
+Route::get('exist/{openId}', 'ApiController@isExist');

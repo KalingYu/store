@@ -99,7 +99,7 @@ var vm = new Vue({
                 goods_id: this.toCartGoods.id,
                 total_price: this.currentGoodsCount * this.toCartGoods.price,
                 count: currentCount,
-                open_id: this.me.open_id
+                open_id: this.me.openid
             };
 
             addToCart(cartGoods, function () {
@@ -128,7 +128,7 @@ var vm = new Vue({
 
 getGoodsData();
 getCarts();
-addUser();
+// addUser();
 getUser();
 
 /**
@@ -144,7 +144,7 @@ function addToCart(cartGoods, callback) {
         success: function (jsonData) {
             var code = jsonData["code"];
             var msg = jsonData["msg"];
-            if (code == 0) {
+            if (code === 0) {
                 callback();
                 showSucceedToast();
             } else {
@@ -156,7 +156,7 @@ function addToCart(cartGoods, callback) {
 
 function deleteCart(cartId, callback) {
 
-    var url = 'http://127.0.0.1:1024' + '/api/carts/delete';
+    var url = '/api/carts/delete';
     $.ajax({
         type: "POST",
         url: url,
@@ -292,7 +292,7 @@ function getUser() {
 function getCarts() {
     axios({
         method: 'get',
-        url: "" + '/api/carts/' + vm.me.open_id,
+        url: "" + '/api/carts/' + vm.me.openid,
         responseType: 'json'
     }).then(function (response) {
         console.log(response);

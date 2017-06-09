@@ -23,7 +23,8 @@
 {{--</html>--}}
 <?php
 $redirectUri = urlencode("http://wf.hk1.mofasuidao.cn/token");
-$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx510ecd8668932ea8&redirect_uri=" . $redirectUri . "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+$appId = "wxb206faacb556aef7";
+$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appId."&redirect_uri=" . $redirectUri . "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
 //echo $url;
 //header('location:'.$url);
 ?>

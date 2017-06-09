@@ -70,9 +70,9 @@
                     <!--搜索框结束-->
 
                     <!--轮播开始-->
-                    <div class="carousel carousel-slider" data-indicators="true">
-                        <a v-for="img in carouselArray" class="carousel-item"><img :src="img.imgUrl"></a>
-                    </div>
+                    {{--<div class="carousel carousel-slider" data-indicators="true">--}}
+                        {{--<a v-for="img in carouselArray" class="carousel-item"><img :src="img.imgUrl"></a>--}}
+                    {{--</div>--}}
                     <!--轮播结束-->
 
                     {{--商品列表--}}
@@ -88,7 +88,7 @@
                                     <!--标题，一般几个字就行了-->
                                     <span class="card-title">@{{goods.name}} <i
                                                 class="goods-price">￥@{{goods.price}}/步</i> <img
-                                                src="img/goods-detail.png"
+                                                src="{{asset("img/goods-detail.png")}}"
                                                 class="right activator goods-detail-btn"></span>
                                     <p class="add-to-cart-container"><a href="javascript:;"
                                                                         @click="showAddCartSheet(index)"
@@ -96,7 +96,7 @@
                                     </p>
                                 </div>
                                 <div class="card-reveal">
-                                    <img class="card-title  right close-btn" src="img/close-btn.png"/>
+                                    <img class="card-title  right close-btn" src={{asset("img/close-btn.png")}}/>
                                     <p class="goods-detail">
                                         @{{goods.intro}}
                                     </p>
@@ -114,7 +114,7 @@
                                     <!--标题，一般几个字就行了-->
                                     <span class="card-title">@{{goods.name}} <i
                                                 class="goods-price">￥@{{goods.price}}/扇</i> <img
-                                                src="img/goods-detail.png"
+                                                src="{{asset("img/goods-detail.png")}}"
                                                 class="right activator goods-detail-btn"></span>
                                     <p class="add-to-cart-container"><a href="javascript:;"
                                                                         @click="showAddCartSheet(index)"
@@ -122,7 +122,7 @@
                                     </p>
                                 </div>
                                 <div class="card-reveal">
-                                    <img class="card-title  right close-btn" src="img/close-btn.png"/>
+                                    <img class="card-title  right close-btn" src="{{asset("img/close-btn.png")}}"/>
                                     <p class="goods-detail">
                                         @{{goods.intro}}
                                     </p>
@@ -138,17 +138,18 @@
                                 </div>
                                 <div class="card-content">
                                     <!--标题，一般几个字就行了-->
-                                    <span class="card-title">@{{goods.name}} <i
-                                                class="goods-price">￥@{{goods.price}}/m</i> <img
-                                                src="img/goods-detail.png"
-                                                class="right activator goods-detail-btn"></span>
+                                    <span class="card-title">@{{goods.name}}
+                                        <i class="goods-price">￥@{{goods.price}}/m</i>
+                                        <img src="{{asset("img/goods-detail.png")}}"
+                                                class="right activator goods-detail-btn">
+                                    </span>
                                     <p class="add-to-cart-container"><a href="javascript:;"
                                                                         @click="showAddCartSheet(index)"
                                                                         class="add-to-cart-btn weui-btn_mini weui-btn weui-btn_plain-primary">添加到购物车</a>
                                     </p>
                                 </div>
                                 <div class="card-reveal">
-                                    <img class="card-title  right close-btn" src="img/close-btn.png"/>
+                                    <img class="card-title  right close-btn" src="{{asset("img/close-btn.png")}}"/>
                                     <p class="goods-detail">
                                         @{{goods.intro}}
                                     </p>
@@ -173,7 +174,7 @@
                             </div>
                             <div class="cart-goods_name weui-cell__ft">
                                 <span class="right cart-goods_delete"><img @click="deleteCart(index, goods.id)"
-                                                                           src="img/delete-icon.png"></span>
+                                                                           src="{{asset("img/delete-icon.png")}}"></span>
                                 <span class="right cart-total_count">@{{goods.count}}</span>
                             </div>
                         </div>
@@ -261,15 +262,15 @@
             </div>
             <div class="weui-tabbar">
                 <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
-                    <img id="store_icon" src="img/home-active.png" alt="" class="weui-tabbar__icon">
+                    <img id="store_icon" src="{{asset("img/home-active.png")}}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">商城</p>
                 </a>
                 <a href="javascript:;" class="weui-tabbar__item">
-                    <img id="cart_icon" src="img/cart.png" alt="" class="weui-tabbar__icon">
+                    <img id="cart_icon" src="{{asset("img/cart.png")}}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">购物车</p>
                 </a>
                 <a href="javascript:;" class="weui-tabbar__item">
-                    <img id="me_icon" src="img/me.png" alt="" class="weui-tabbar__icon">
+                    <img id="me_icon" src="{{asset("img/me.png")}}" alt="" class="weui-tabbar__icon">
                     <p class="weui-tabbar__label">我</p>
                 </a>
             </div>
@@ -325,11 +326,8 @@
     </div>
     <!--end toast-->
 
-    <input type="hidden" id="openid" value="{{$infoArr['openid']}}">
-    <input type="hidden" id="nickname" value="{{$infoArr['nickname']}}">
-    <input type="hidden" id="sex" value="{{$infoArr['sex']}}">
-    <input type="hidden" id="headimgurl" value="{{$infoArr['headimgurl']}}">
-
+    <input type="hidden" id="openid" value="{{$openId}}">
+    <input type="hidden" id="imgurl" value="{{url('/img')}}">
 </div>
 
 </body>
@@ -342,6 +340,7 @@
 <script src={{asset("js/lib/init.js")}}></script>
 <script src={{asset("js/lib/listener.js")}}></script>
 <script src={{asset("js/initData.js")}}></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src={{asset("js/weixin.js")}}></script>
 <script>
     $(document).ready(function () {

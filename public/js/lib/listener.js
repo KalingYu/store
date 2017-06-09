@@ -7,9 +7,10 @@ function initTabBar() {
 }
 
 function resetTabBarIcon() {
-    $("#store_icon").attr("src", "img/home.png");
-    $("#cart_icon").attr("src", "img/cart.png");
-    $("#me_icon").attr("src", "img/me.png");
+    var imgUrl = document.getElementById("imgurl").value;
+    $("#store_icon").attr("src", imgUrl + "/home.png");
+    $("#cart_icon").attr("src", imgUrl + "/cart.png");
+    $("#me_icon").attr("src", imgUrl + "/me.png");
 }
 
 function setActiveTabBarIcon(tab) {

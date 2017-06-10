@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\User;
+use Curl\Curl;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -197,7 +198,7 @@ class ApiController extends Controller
     public function getWxPayParam(Request $request)
     {
         $code = 0;
-        $msg = "删除成功";
+        $msg = "参数获取成功";
         $body = [];
 
         $openId = $request->input('openid');
@@ -217,7 +218,7 @@ class ApiController extends Controller
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 1000 * 60 * 5));
         $input->SetGoods_tag("test");
-        $input->SetNotify_url(url('http://wf.hk1.mofasuidao.cn/api/notify'));
+        $input->SetNotify_url(url('api/notify'));
         $input->SetTrade_type("JSAPI");
         $input->SetOpenid($openId);
         $order = WxPayApi::unifiedOrder($input);

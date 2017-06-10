@@ -243,23 +243,34 @@ function deleteCart(cartId, callback) {
 
 function goToWXPay(orderNumber, price) {
 
-    $.ajax({
-        type: "POST",
-        url: "/api/payparams",
-        dataType: "json",
-        data: {"openid": vm.me.openid, "price": price, "orderNumber": orderNumber},
-        success: function (jsonData) {
-            var code = jsonData["code"];
-            var msg = jsonData["msg"];
-            if (code === 0) {
-                var jsPayParam = jsonData['body'];
-                console.log("签名的是：" + jsPayParam);
-                jsApiCall(jsPayParam);
-            } else {
-                alert(msg);
-            }
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
         }
-    });
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/api/payparams",
+            dataType: "json",
+            data: {"openid": vm.me.openid, "price": price, "orderNumber": orderNumber},
+            success: function (jsonData) {
+                var code = jsonData["code"];
+                var msg = jsonData["msg"];
+                if (code === 0) {
+                    var jsPayParam = jsonData['body'];
+                    console.log("签名的是：" + jsPayParam);
+                    jsApiCall(jsPayParam);
+                } else {
+                    alert(msg);
+                }
+            }
+        });
+
+    }
+
 }
 
 /**
@@ -283,12 +294,13 @@ function jsApiCall(jsapi) {
                 //你的业务逻辑
 
             } else {
-                alert("支付失败")
+                alert("支付失败");
                 alert(JSON.stringify(res.err_msg))
             }
         }
     );
 }
+
 
 /**
  * 添加订单

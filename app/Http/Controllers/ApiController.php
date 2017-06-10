@@ -35,16 +35,16 @@ class ApiController extends Controller
         $code = 0;
         $msg = "用户存在";
         $body = [];
-        try {
-            $result = DB::table('users')->where('openid', $openId)->get();
-            if ($result->isEmpty()) {
-                $msg = "用户不存在";
-                $code = -1;
-            }
-        } catch (QueryException $ex) {
-            $code = -1;
-            $msg = "查询失败";
-        }
+//        try {
+//            $result = DB::table('users')->where('openid', $openId)->get();
+//            if ($result->isEmpty()) {
+//                $msg = "用户不存在";
+//                $code = -1;
+//            }
+//        } catch (QueryException $ex) {
+//            $code = -1;
+//            $msg = "查询失败";
+//        }
         return response()->json(['code' => $code, 'msg' => $msg, 'body' => $body]);
     }
 
